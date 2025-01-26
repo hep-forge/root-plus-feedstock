@@ -1,0 +1,52 @@
+{% set version = environ.get('COMMIT_VERSION', "HEAD") %}
+{% set version = version|string %}
+
+package:
+  name: {{ environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower }}
+  version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
+
+source:
+  git_url: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
+  git_rev: {{ version }}
+
+#build:
+#  script_env:
+#    - CFLAGS="-I${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/include"
+#    - CPPFLAGS="-I${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/include"
+#    - LDFLAGS="-L${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/lib"
+
+requirements:
+  build:
+    - {{ compiler('cxx') }} # [linux]
+    - {{ compiler('c') }}   # [linux]
+    - {{ stdlib('c') }}
+
+    - clang
+    - cmake
+    - make
+
+    - cuda-nvcc
+
+  host:
+
+    - root
+    - libarchive
+    - howardhinnant_date
+    - tbb-devel
+
+    - libtorch
+    - cudatoolkit
+
+  run:
+    - root
+
+about:
+  home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
+  license: "GPL-3.0"
+  summary: "ROOT+ for Tensor Calculation & Advanced Signal Processing"
+  description: |
+    ROOT+ is an Open-Source library implementing complex tensor calculation, advanced signal processing. It can be used for scientific Machine Learning developments in C/C++"
+
+extra:
+  recipe-maintainers:
+    - meiyasan
