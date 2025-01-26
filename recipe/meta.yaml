@@ -1,4 +1,9 @@
-{% set version = environ.get('COMMIT_VERSION', "HEAD") %}
+{% set versions = {
+    "1.0": "332c763d2d5eb8a759893453637f24b3900476f73a1a4c7a205f8f7b3104f449",
+} %}
+
+{% set version = environ.get('COMMIT_VERSION', None) %}
+{% set version = version or versions.keys()|first %}
 {% set version = version|string %}
 
 package:
