@@ -9,12 +9,6 @@ source:
   git_url: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
   git_rev: {{ version }}
 
-#build:
-#  script_env:
-#    - CFLAGS="-I${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/include"
-#    - CPPFLAGS="-I${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/include"
-#    - LDFLAGS="-L${PREFIX}/x86_64-conda-linux-gnu/sysroot/usr/lib"
-
 requirements:
   build:
     - {{ compiler('cxx') }} # [linux]
@@ -36,6 +30,7 @@ requirements:
 
     - libtorch
     - cudatoolkit
+    - libcurl
 
   run:
     - root
