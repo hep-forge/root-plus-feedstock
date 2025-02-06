@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@.modulemap:||g")

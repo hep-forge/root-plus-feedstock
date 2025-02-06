@@ -27,18 +27,24 @@ requirements:
     - cuda-nvcc
 
   host:
-
     - root
     - libarchive
     - howardhinnant_date
     - tbb-devel
+    - libcurl
 
     - libtorch
     - cudatoolkit
-    - libcurl
 
   run:
     - root
+    - libarchive
+    - howardhinnant_date
+    - tbb-devel
+    - libcurl
+
+    - libtorch
+    - cudatoolkit
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
