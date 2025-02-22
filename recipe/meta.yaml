@@ -1,5 +1,5 @@
 {% set versions = {
-    "1.0.0": "eaa12463a9dc4279e3d518542c737a7e4f0cac2b",
+    "1.0.0": "99a9ae2fc8b9a1798666f9f32f0c0debe7372aa9",
 } %}
 
 {% set version = environ.get('COMMIT_VERSION', None) %}
