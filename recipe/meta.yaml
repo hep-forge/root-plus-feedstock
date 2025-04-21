@@ -35,6 +35,9 @@ requirements:
 
     - libtorch
     - cudatoolkit
+    
+    - libdate-tz
+    - onnxruntime-cpp
 
   run:
     - root
@@ -45,6 +48,9 @@ requirements:
 
     - libtorch
     - cudatoolkit
+    
+    - libdate-tz
+    - onnxruntime-cpp
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
