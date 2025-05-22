@@ -53,7 +53,6 @@ requirements:
     - libarchive
     - onnxruntime-cpp
     - libtorch
-    - cudatoolkit
     - tbb-devel
 
     - hdf5
