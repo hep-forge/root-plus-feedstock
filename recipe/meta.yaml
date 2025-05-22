@@ -28,7 +28,7 @@ requirements:
     - cuda-nvcc
 
   host:
-    - hep-forge::root
+    - root
     - minio-cpp=latest
     - libdate-tz
     - libarchive
@@ -47,7 +47,7 @@ requirements:
     - yaml-cpp
 
   run:
-    - hep-forge::root
+    - root
 
     - minio-cpp=latest
     - libdate-tz
