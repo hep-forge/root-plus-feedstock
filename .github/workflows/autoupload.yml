@@ -122,7 +122,9 @@ jobs:
           /usr/share/miniconda/bin/conda config --add channels defaults
           /usr/share/miniconda/bin/conda config --add channels conda-forge
           /usr/share/miniconda/bin/conda config --add channels hep-forge
-          
+          /usr/share/miniconda/bin/conda config --set channel_priority strict
+          /usr/share/miniconda/bin/conda config --show channel_priority
+
       - name: Build Package
         env:
           COMMIT_LATEST_TAG: ${{needs.env.outputs.COMMIT_LATEST_TAG}}
