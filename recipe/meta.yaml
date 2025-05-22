@@ -29,29 +29,41 @@ requirements:
 
   host:
     - root
+    - minio-cpp=latest
+    - libdate-tz
     - libarchive
-    - howardhinnant_date
-    - tbb-devel
-    - libcurl
-
+    - onnxruntime-cpp
     - libtorch
     - cudatoolkit
-    
-    - libdate-tz
-    - onnxruntime-cpp
+    - tbb-devel
+
+    - hdf5
+    - librdkafka
+    - inih
+    - curl
+    - nlohmann_json
+    - tomlplusplus
+    - libxml2
+    - yaml-cpp
 
   run:
     - root
+    - minio-cpp=latest
+    - libdate-tz
     - libarchive
-    - howardhinnant_date
-    - tbb-devel
-    - libcurl
-
+    - onnxruntime-cpp
     - libtorch
     - cudatoolkit
-    
-    - libdate-tz
-    - onnxruntime-cpp
+    - tbb-devel
+
+    - hdf5
+    - librdkafka
+    - inih
+    - curl
+    - nlohmann_json
+    - tomlplusplus
+    - libxml2
+    - yaml-cpp
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
