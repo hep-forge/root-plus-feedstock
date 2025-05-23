@@ -53,7 +53,8 @@ requirements:
     - libdate-tz
     - libarchive
     - onnxruntime-cpp
-    - libtorch
+
+    - {{ pin_compatible('libtorch', max_pin='x.x') }}
     - cudatoolkit
     - tbb
 
