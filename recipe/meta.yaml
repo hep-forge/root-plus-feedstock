@@ -54,7 +54,8 @@ requirements:
     - libarchive
     - onnxruntime-cpp
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
-    - tbb-devel
+    - {{ pin_compatible('cudatoolkit', max_pin='x.x') }}
+    - tbb
 
     - hdf5
     - librdkafka
