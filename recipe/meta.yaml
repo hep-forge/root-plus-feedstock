@@ -10,7 +10,10 @@
 build:
   number: 0
   string: "torch{{ libtorch.replace('.', '') }}"
-
+  ignore_run_exports_from:
+    - tbb
+    - tbb-devel
+    
 package:
   name: {{ environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower }}
   version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
@@ -39,6 +42,7 @@ requirements:
     - onnxruntime-cpp
     - libtorch
     - cudatoolkit
+    - tbb
     - tbb-devel
 
     - hdf5
@@ -61,6 +65,7 @@ requirements:
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
     - cudatoolkit
     - tbb
+    - tbb-devel
 
     - hdf5
     - librdkafka
