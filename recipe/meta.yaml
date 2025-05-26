@@ -54,6 +54,8 @@ requirements:
     - libxml2
     - yaml-cpp
 
+    - lalsuite
+
   run:
     - root
 
@@ -75,6 +77,8 @@ requirements:
     - tomlplusplus
     - libxml2
     - yaml-cpp
+
+    - lalsuite
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
