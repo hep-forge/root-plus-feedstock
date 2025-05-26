@@ -1,5 +1,5 @@
 {% set versions = {
-    "beta": "ee5cde40942b33fe2e973beb9556fcda31308897",
+    "beta": "1945b32a646281d52827c6066d4f8b20cbd0f976",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
 
