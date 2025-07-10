@@ -1,0 +1,29 @@
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+curl:
+- '8'
+hdf5:
+- 1.14.3
+libarchive:
+- '3.8'
+librdkafka:
+- '2.6'
+libtorch:
+- 2.6.0
+libxml2:
+- '2.13'
+root:
+- '6.32'
+target_platform:
+- win-64
+tbb:
+- '2021'
+tbb_devel:
+- '2021'
+zip_keys:
+- - libtorch
+  - root
