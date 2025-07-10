@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
 export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@.modulemap:||g")
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@_Cloud.modulemap:||g")
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@_Config.modulemap:||g")
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@_Tensor.modulemap:||g")
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@_Format.modulemap:||g")
+export CLING_MODULEMAP_FILES=$(echo "$CLING_MODULEMAP_FILES" | sed "s|${CONDA_PREFIX}/@PROJECT_NAME@_Signal.modulemap:||g")

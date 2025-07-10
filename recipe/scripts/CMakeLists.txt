@@ -49,4 +49,3 @@ configure_file(${RECIPE_DIR}/scripts/activate.sh.in
 
 configure_file(${RECIPE_DIR}/scripts/deactivate.sh.in
                "${PREFIX}/etc/conda/deactivate.d/${PKG_NAME}_deactivate.sh" @ONLY)
-message("${PREFIX}/etc/conda/activate.d/${PKG_NAME}_activate.sh")
