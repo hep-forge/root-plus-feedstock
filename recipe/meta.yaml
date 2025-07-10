@@ -9,11 +9,11 @@
 
 build:
   number: 0
-  string: "torch{{ libtorch.replace('.', '') }}"
+  string: "torch{{ libtorch.replace('.', '') }}-root{{ root.replace('.', '') }}"
   ignore_run_exports_from:
     - tbb
     - tbb-devel
-    
+
 package:
   name: {{ environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower }}
   version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
@@ -35,12 +35,13 @@ requirements:
     - cuda-nvcc
 
   host:
-    - root
+    - {{ pin_compatible('root', max_pin='x.x') }}
+    - {{ pin_compatible('libtorch', max_pin='x.x') }}
+
     - minio-cpp=latest
     - libdate-tz
     - libarchive
     - onnxruntime-cpp
-    - libtorch
     - cudatoolkit
     - tbb
     - tbb-devel
