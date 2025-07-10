@@ -9,7 +9,7 @@
 
 build:
   number: 0
-  string: "torch{{ libtorch.replace('.', '') }}-root{{ root.replace('.', '') }}"
+  string: "torch{{ libtorch.replace('.', '') }}_root{{ root.replace('.', '') }}"
   ignore_run_exports_from:
     - tbb
     - tbb-devel
