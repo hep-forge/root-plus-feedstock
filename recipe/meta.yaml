@@ -7,6 +7,9 @@
 {% set version = version or versions.keys()|first %}
 {% set version = version|string %}
 
+{% set libtorch = libtorch if libtorch or "0" %}
+{% set root = root if root or "0" %}
+
 build:
   number: 0
   string: "torch{{ libtorch.replace('.', '') }}_root{{ root.replace('.', '') }}"
