@@ -58,8 +58,6 @@ requirements:
     - libxml2
     - yaml-cpp
 
-    - lalsuite
-
   run:
     - {{ pin_compatible('root', max_pin='x.x') }}
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
@@ -81,8 +79,6 @@ requirements:
     - tomlplusplus
     - libxml2
     - yaml-cpp
-
-    - lalsuite
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
