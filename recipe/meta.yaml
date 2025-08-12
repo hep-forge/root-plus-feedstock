@@ -38,7 +38,7 @@ requirements:
     - cuda-nvcc
 
   host:
-    - {{ pin_compatible('root', max_pin='x.x') }}
+    - root
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
     - minio-cpp=latest
@@ -59,7 +59,7 @@ requirements:
     - yaml-cpp
 
   run:
-    - {{ pin_compatible('root', max_pin='x.x') }}
+    - root
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
     - minio-cpp=latest
@@ -80,6 +80,12 @@ requirements:
     - libxml2
     - yaml-cpp
 
+test:
+  commands:
+    - root-config --version
+    - test -f $PREFIX/lib/libRIOPlus_rdict.pcm
+    - test -f $PREFIX/lib/libRIOPlus.rootmap
+    
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
   license: "GPL-3.0"
