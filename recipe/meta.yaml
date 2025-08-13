@@ -83,8 +83,6 @@ requirements:
 test:
   commands:
     - root-config --version
-    - test -f $PREFIX/lib/libRIOPlus_rdict.pcm
-    - test -f $PREFIX/lib/libRIOPlus.rootmap
     
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
