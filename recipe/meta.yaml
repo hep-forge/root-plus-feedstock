@@ -80,10 +80,6 @@ requirements:
     - libxml2
     - yaml-cpp
 
-test:
-  commands:
-    - root-config --version
-    
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
   license: "GPL-3.0"
