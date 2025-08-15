@@ -69,7 +69,6 @@ requirements:
 
     - cudatoolkit
     - tbb
-    - tbb-devel
 
     - hdf5
     - librdkafka
