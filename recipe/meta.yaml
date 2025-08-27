@@ -27,9 +27,7 @@ source:
 
 requirements:
   build:
-    - {{ compiler('cxx') }} # [linux]
-    - {{ compiler('c') }}   # [linux]
-    - {{ stdlib('c') }}
+    - root {{ root }}.*
 
     - clang
     - cmake
@@ -38,7 +36,7 @@ requirements:
     - cuda-nvcc
 
   host:
-    - root
+    - root {{ root }}.*
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
     - minio-cpp=latest
@@ -59,7 +57,7 @@ requirements:
     - yaml-cpp
 
   run:
-    - root
+    - root {{ root }}.*
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
     - minio-cpp=latest
