@@ -143,11 +143,6 @@ jobs:
           for PKG in $(find pkgs -name "*.tar.bz2"); do  
               /usr/share/miniconda/bin/cph transmute $PKG .conda
           done
-          
-          for CONDA in $(find pkgs -name "*.conda" | sort); do         
-            /usr/share/miniconda/bin/anaconda -t $ANACONDA_TOKEN upload --force "$CONDA" --label "$ANACONDA_LABEL"
-          done
-          
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
