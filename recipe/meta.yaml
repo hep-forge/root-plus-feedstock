@@ -1,6 +1,6 @@
 {% set versions = {
-    "beta": "beta",
-    "alpha": "alpha",
+    "beta": "362bbdfaa2d515c3e96524fbe79845cc0ff3dc49",
+    "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
 
 {% set version = environ.get('COMMIT_VERSION', None) %}
