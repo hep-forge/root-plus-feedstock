@@ -28,7 +28,6 @@ source:
 requirements:
   build:
     - root {{ root }}.*
-    - pythia
 
     - clang
     - cmake
@@ -37,7 +36,6 @@ requirements:
 
   host:
     - root {{ root }}.*
-    - pythia
 
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
@@ -59,7 +57,6 @@ requirements:
 
   run:
     - root {{ root }}.*
-    - pythia
     - {{ pin_compatible('libtorch', max_pin='x.x') }}
 
     - minio-cpp=latest
