@@ -63,8 +63,8 @@ requirements:
     - libdate-tz
     - libarchive
     - onnxruntime-cpp
-
     - tbb
+    - tbb-devel
 
     - hdf5
     - librdkafka
