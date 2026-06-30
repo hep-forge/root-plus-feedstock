@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(CondaEnv)
+project(CondaEnv NONE)
 
 function(load_dotenv dotenv_file)
     if (EXISTS "${dotenv_file}")

@@ -16,6 +16,8 @@ build:
   ignore_run_exports_from:
     - tbb
     - tbb-devel
+  run_exports:
+    - {{ pin_subpackage(name, max_pin="x.x.x") }}
 
 package:
   name: {{ environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower }}

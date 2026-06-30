@@ -1,8 +1,21 @@
 #!/bin/bash
 
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@.modulemap"        ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@.modulemap:${CLING_MODULEMAP_FILES}"
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@_Cloud.modulemap"  ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@_Cloud.modulemap:${CLING_MODULEMAP_FILES}"
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@_Config.modulemap" ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@_Config.modulemap:${CLING_MODULEMAP_FILES}"
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@_Tensor.modulemap" ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@_Tensor.modulemap:${CLING_MODULEMAP_FILES}"
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@_Format.modulemap" ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@_Format.modulemap:${CLING_MODULEMAP_FILES}"
-[ -f "${CONDA_PREFIX}/lib/@PROJECT_NAME@_Signal.modulemap" ] && export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/@PROJECT_NAME@_Signal.modulemap:${CLING_MODULEMAP_FILES}"
+# Prepend the conda env lib so ROOT always loads its own libCling before any
+# library from an externally-sourced ROOT installation (e.g. a stale thisroot.sh).
+# ROOT constructs the libCling path as $ROOTSYS/lib/libCling.so at runtime, so
+# we also override ROOTSYS if it points outside the conda prefix.
+export _CONDA_BACKUP_LD_LIBRARY_PATH_RIOPLUS="${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+
+if [ -n "${ROOTSYS:-}" ] && [ "${ROOTSYS}" != "${CONDA_PREFIX}" ]; then
+    echo "[@PKG_NAME@] WARNING: ROOTSYS='${ROOTSYS}' differs from conda prefix." >&2
+    echo "[@PKG_NAME@]          Overriding to prevent loading libCling from the wrong ROOT." >&2
+    export _CONDA_BACKUP_ROOTSYS_RIOPLUS="${ROOTSYS}"
+    export ROOTSYS="${CONDA_PREFIX}"
+fi
+
+# Register any modulemap files installed into this conda environment.
+for _f in "${CONDA_PREFIX}/lib/"*.modulemap; do
+    [ -f "$_f" ] && export CLING_MODULEMAP_FILES="${_f}:${CLING_MODULEMAP_FILES:-}"
+done
+unset _f
