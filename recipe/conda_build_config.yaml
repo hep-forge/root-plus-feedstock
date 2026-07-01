@@ -18,5 +18,5 @@ libtorch:
   - 2.8.0
 
 zip_keys:
-  - libtorch
-  - root
+  - - libtorch
+    - root
