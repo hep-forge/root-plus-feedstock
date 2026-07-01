@@ -6,8 +6,6 @@ c_stdlib_version:              # [unix]
   - 11.0                       # [osx]  
 
 root:
-#  - 6.32
-  - 6.34
   - 6.36
   - 6.38
 
