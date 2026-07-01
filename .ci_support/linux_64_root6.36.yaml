@@ -1,0 +1,29 @@
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+curl:
+- '8'
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:alma9
+hdf5:
+- 1.14.6
+libarchive:
+- '3.8'
+librdkafka:
+- '2.14'
+libtorch:
+- 2.8.0
+libxml2:
+- '2.14'
+root:
+- '6.36'
+target_platform:
+- linux-64
+tbb:
+- '2022'
+tbb_devel:
+- '2022'
+zip_keys:
+- - libtorch
+  - root
