@@ -35,13 +35,6 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Enforce tag-only builds
-        run: |
-          if [ "$GITHUB_REF_TYPE" != "tag" ]; then
-            echo "::error::This workflow only builds on tag refs (push a version tag, or re-run workflow_dispatch with a tag selected as the ref). Refusing to build on '$GITHUB_REF_NAME'."
-            exit 1
-          fi
-
       - id: git
         name: Fetch Git Repository Information
         run: |
