@@ -1,6 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
+    "1.0.0": "63e7bafae5338b09a764172f32f52bf1670723a7",
     "beta": "63e7bafae5338b09a764172f32f52bf1670723a7",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -27,7 +28,9 @@ package:
 
 source:
   git_url: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
-  git_rev: {{ version }}
+  # feedstock version tags (e.g. 1.0.0) map to upstream commits; fall
+  # back to the raw ref for upstream tag names like alpha/beta
+  git_rev: {{ versions.get(version, version) }}
 
 requirements:
   build:
@@ -41,7 +44,9 @@ requirements:
   host:
     - root {{ root }}.*
 
-    - {{ pin_compatible('libtorch', max_pin='x.x') }}
+    # cpu build glob: the solver otherwise picks CUDA libtorch, whose
+    # Caffe2 cmake config then demands the CUDA toolkit at build time
+    - libtorch {{ libtorch }}.* cpu*
 
     - minio-cpp=latest
     - libdate-tz
@@ -61,7 +66,7 @@ requirements:
 
   run:
     - root {{ root }}.*
-    - {{ pin_compatible('libtorch', max_pin='x.x') }}
+    - libtorch {{ libtorch }}.* cpu*
 
     - minio-cpp=latest
     - libdate-tz
