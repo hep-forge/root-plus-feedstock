@@ -48,7 +48,7 @@ requirements:
     # Caffe2 cmake config then demands the CUDA toolkit at build time
     - libtorch {{ libtorch }}.* cpu*
 
-    - minio-cpp=latest
+    - minio-cpp>=0.3
     - libdate-tz
     - libarchive
     - onnxruntime-cpp
@@ -68,7 +68,7 @@ requirements:
     - root {{ root }}.*
     - libtorch {{ libtorch }}.* cpu*
 
-    - minio-cpp=latest
+    - minio-cpp>=0.3
     - libdate-tz
     - libarchive
     - onnxruntime-cpp
