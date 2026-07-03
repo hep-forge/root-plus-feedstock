@@ -1,3 +1,5 @@
+{% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
+
 {% set versions = {
     "beta": "63e7bafae5338b09a764172f32f52bf1670723a7",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
@@ -20,7 +22,7 @@ build:
     - {{ pin_subpackage(name, max_pin="x.x.x") }}
 
 package:
-  name: {{ environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower }}
+  name: {{ name }}
   version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
 
 source:
