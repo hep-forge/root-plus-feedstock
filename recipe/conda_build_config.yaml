@@ -5,15 +5,13 @@ c_stdlib_version:              # [unix]
   - 2.17                       # [linux]
   - 11.0                       # [osx]  
 
+# root 6.36 dropped: 6.36.04 was only ever published for linux-64, no
+# linux-aarch64 build exists, so every aarch64 attempt against that
+# variant slot was unsatisfiable ("root==6.36.10=py314..." in the
+# solver's error is its own garbled placeholder for the missing build,
+# not a real version). 6.38 is published on both architectures.
 root:
-  - 6.36
   - 6.38
 
 libtorch:
-#  - 2.6.0
   - 2.8.0
-  - 2.8.0
-
-zip_keys:
-  - - libtorch
-    - root
