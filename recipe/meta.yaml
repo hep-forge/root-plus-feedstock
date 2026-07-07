@@ -1,9 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "1.0.1": "7033cc9ab5e01cef67f8ce17d815142f48cf7201",
-    "1.0.0": "bf94f04a54a033cd6fc922e18c0c136e2811bc1a",
-    "beta": "bf94f04a54a033cd6fc922e18c0c136e2811bc1a",
+    "beta": "7033cc9ab5e01cef67f8ce17d815142f48cf7201",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
 
@@ -20,8 +18,13 @@ build:
   ignore_run_exports_from:
     - tbb
     - tbb-devel
+  # max_pin="x.x.x" tries to compute an upper bound by numerically
+  # incrementing the version, which crashes (ValueError: invalid
+  # literal for int()) for non-numeric versions like "beta"/"alpha" --
+  # this package's actual version scheme. max_pin=None pins the lower
+  # bound only, skipping that computation entirely.
   run_exports:
-    - {{ pin_subpackage(name, max_pin="x.x.x") }}
+    - {{ pin_subpackage(name, max_pin=None) }}
 
 package:
   name: {{ name }}
