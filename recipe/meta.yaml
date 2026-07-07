@@ -98,3 +98,9 @@ about:
 extra:
   recipe-maintainers:
     - meiyasan
+  # "beta" is this package's actual released version, not a disposable
+  # dev build -- protect it from the channel trim step the same way a
+  # numeric release would be (see scripts/templates/autoupload.yml).
+  release_tags:
+    main:
+      - beta
