@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "beta": "b4270c7e93f14ac0fc3c9c7ea7d61a9c9e8d2518",
+    "beta": "d532770c2f83a7109277db3806f31127e6187b5e",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
 
@@ -15,6 +15,14 @@
 build:
   number: 0
   string: "torch{{ libtorch.replace('.', '') }}_root{{ root.replace('.', '') }}"
+  # .pcm are binary Clang module caches, not text -- conda-build's default
+  # prefix-relocation naively text-substitutes the build prefix inside
+  # every installed file it doesn't know to skip, which can corrupt a
+  # binary format (observed: a garbled/truncated module reference at
+  # runtime, "module file ... not found"). Same pattern hep-forge's own
+  # root-feedstock already uses for its lib/*.pcm and etc/allDict.cxx.pch.
+  ignore_prefix_files:
+    - lib/*.pcm
   ignore_run_exports_from:
     - tbb
     - tbb-devel
