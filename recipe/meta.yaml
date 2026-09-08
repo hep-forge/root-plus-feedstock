@@ -76,6 +76,15 @@ requirements:
     - libxml2
     - yaml-cpp
 
+    # THealPix is compiled only when both of these are found: the top-level
+    # CMakeLists does a plain find_package(HealPix)/find_package(CFITSIO)
+    # (no REQUIRED), and src/Core + examples/Core then FILTER the healpix
+    # sources out when HealPix_FOUND/CFITSIO_FOUND are false. Without them
+    # the build still goes green, it just silently ships no THealPix -- so
+    # every beta up to 7cf9e44 published without the feature.
+    - healpix_cxx
+    - cfitsio
+
   run:
     - root {{ root }}.*
     - libtorch {{ libtorch }}.* cpu*
@@ -95,6 +104,9 @@ requirements:
     - tomlplusplus
     - libxml2
     - yaml-cpp
+
+    - healpix_cxx
+    - cfitsio
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
