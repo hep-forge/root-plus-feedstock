@@ -82,7 +82,16 @@ requirements:
     # sources out when HealPix_FOUND/CFITSIO_FOUND are false. Without them
     # the build still goes green, it just silently ships no THealPix -- so
     # every beta up to 7cf9e44 published without the feature.
-    - healpix_cxx
+    #
+    # healpix_cxx is floored deliberately: 3.83 constrains
+    # cfitsio >=4.6.3,<4.6.4.0a0, so leaving cfitsio unpinned lets the
+    # solver take the newest cfitsio (4.7.0) and satisfy a bare
+    # "healpix_cxx" by dropping back to 3.31 instead. That is exactly what
+    # happened on linux-64 while linux-aarch64 kept 3.83 -- the two arches
+    # built against healpix releases years apart, and the 3.31 build has no
+    # run_exports so its run dep came out unbounded. Pin the floor here and
+    # let healpix's own bound pick cfitsio.
+    - healpix_cxx >=3.83
     - cfitsio
 
   run:
@@ -105,7 +114,7 @@ requirements:
     - libxml2
     - yaml-cpp
 
-    - healpix_cxx
+    - healpix_cxx >=3.83
     - cfitsio
 
 about:
