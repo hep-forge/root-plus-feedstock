@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "2ba4a9a99a0a2a2bf2bed524b5fa052865462f4c",
+    "gamma": "aa80feeaad6166c75def282592c51da1b3c64f75",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -100,6 +100,11 @@ requirements:
     # TKFR's FFTW engine (gamma+) is likewise compiled only when
     # find_package(FFTW) succeeds, and skipped without an error otherwise.
     - fftw
+    # Same for the whole RIOPlus::Signal library (FindKFR, kfr_io) and the
+    # XML classes (FindLibXml2 needs the headers, which conda-forge moved
+    # to libxml2-devel): beta and earlier published without either.
+    - kfrlib >=7.2
+    - libxml2-devel
 
   run:
     - root {{ root }}.*
@@ -124,6 +129,7 @@ requirements:
     - healpix_cxx >=3.83
     - cfitsio
     - fftw
+    - kfrlib >=7.2
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
