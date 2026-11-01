@@ -1,6 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
+    "gamma": "2ba4a9a99a0a2a2bf2bed524b5fa052865462f4c",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -96,6 +97,9 @@ requirements:
     # let healpix's own bound pick cfitsio.
     - healpix_cxx >=3.83
     - cfitsio
+    # TKFR's FFTW engine (gamma+) is likewise compiled only when
+    # find_package(FFTW) succeeds, and skipped without an error otherwise.
+    - fftw
 
   run:
     - root {{ root }}.*
@@ -119,6 +123,7 @@ requirements:
 
     - healpix_cxx >=3.83
     - cfitsio
+    - fftw
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
@@ -130,9 +135,10 @@ about:
 extra:
   recipe-maintainers:
     - meiyasan
-  # "beta" is this package's actual released version, not a disposable
+  # "gamma"/"beta" are this package's actual released versions, not a disposable
   # dev build -- protect it from the channel trim step the same way a
   # numeric release would be (see scripts/templates/autoupload.yml).
   release_tags:
     main:
+      - gamma
       - beta
