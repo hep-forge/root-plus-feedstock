@@ -61,7 +61,10 @@ requirements:
     - libtorch {{ libtorch }}.* cpu*
 
     - minio-cpp>=0.3
-    - libdate-tz
+    # date 3.0.5's parse() calls from_stream unqualified, which under C++20+
+    # also finds libstdc++'s std::chrono::from_stream: every date::parse in
+    # TClock.cc becomes ambiguous. 3.0.3 qualifies the call.
+    - libdate-tz 3.0.3
     - libarchive
     - onnxruntime-cpp
     - tbb
@@ -99,7 +102,7 @@ requirements:
     - libtorch {{ libtorch }}.* cpu*
 
     - minio-cpp>=0.3
-    - libdate-tz
+    - libdate-tz 3.0.3
     - libarchive
     - onnxruntime-cpp
     - tbb
