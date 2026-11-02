@@ -3,7 +3,8 @@ c_stdlib:
   - macosx_deployment_target   # [osx]
 c_stdlib_version:              # [unix]
   - 2.17                       # [linux]
-  - 13.3                       # [osx]  kalman (Accelerate CBLAS) needs 13.3
+  # macOS 13.3: kalman (Accelerate CBLAS) needs 13.3
+  - 13.3                     # [osx]
 
 # root 6.36 dropped: 6.36.04 was only ever published for linux-64, no
 # linux-aarch64 build exists, so every aarch64 attempt against that
