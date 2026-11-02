@@ -3,7 +3,7 @@ c_stdlib:
   - macosx_deployment_target   # [osx]
 c_stdlib_version:              # [unix]
   - 2.17                       # [linux]
-  - 11.0                       # [osx]  
+  - 13.3                       # [osx]  kalman (Accelerate CBLAS) needs 13.3
 
 # root 6.36 dropped: 6.36.04 was only ever published for linux-64, no
 # linux-aarch64 build exists, so every aarch64 attempt against that
@@ -15,3 +15,14 @@ root:
 
 libtorch:
   - 2.8.0
+
+# ---- Compiler floor (ABI), Linux only: the selector is on every item, since
+# conda-build drops only the lines whose selector is false.
+c_compiler_version:      # [linux]
+  - 14                   # [linux]
+cxx_compiler_version:    # [linux]
+  - 14                   # [linux]
+libgcc_version:          # [linux]
+  - 14.*                 # [linux]
+libstdcxx_version:       # [linux]
+  - 14.*                 # [linux]
