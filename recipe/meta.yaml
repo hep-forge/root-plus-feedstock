@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "c089a1db91dcbe508dec4abf78d560a0e654eb1a",
+    "gamma": "354b81f3f1d4a0e3ca47ea86b8b7048742dc291f",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -105,6 +105,8 @@ requirements:
     # to libxml2-devel): beta and earlier published without either.
     - kfrlib >=7.2
     - libxml2-devel
+    # TKalmanRecord / TKalmanFilter compile to nothing without libKalmanFramework.
+    - kalman >=1.0.1
 
   run:
     - root {{ root }}.*
@@ -130,6 +132,7 @@ requirements:
     - cfitsio
     - fftw
     - kfrlib >=7.2
+    - kalman >=1.0.1
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
