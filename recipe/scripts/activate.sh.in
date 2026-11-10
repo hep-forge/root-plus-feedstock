@@ -14,8 +14,15 @@ if [ -n "${ROOTSYS:-}" ] && [ "${ROOTSYS}" != "${CONDA_PREFIX}" ]; then
     export ROOTSYS="${CONDA_PREFIX}"
 fi
 
-# Register any modulemap files installed into this conda environment.
-for _f in "${CONDA_PREFIX}/lib/"*.modulemap; do
-    [ -f "$_f" ] && export CLING_MODULEMAP_FILES="${_f}:${CLING_MODULEMAP_FILES:-}"
-done
+# Register the modulemap files installed into this conda environment. The package ships
+# both the aggregate lib/module.modulemap and one map per library declaring the same
+# modules; registering both makes clang fail with "redefinition of module 'RIOPlus'",
+# which breaks every cling call (e.g. the Minuit2 plugin). Prefer the aggregate map.
+if [ -s "${CONDA_PREFIX}/lib/module.modulemap" ]; then
+    export CLING_MODULEMAP_FILES="${CONDA_PREFIX}/lib/module.modulemap:${CLING_MODULEMAP_FILES:-}"
+else
+    for _f in "${CONDA_PREFIX}/lib/"*.modulemap; do
+        [ -f "$_f" ] && export CLING_MODULEMAP_FILES="${_f}:${CLING_MODULEMAP_FILES:-}"
+    done
+fi
 unset _f
