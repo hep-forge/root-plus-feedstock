@@ -44,6 +44,13 @@ source:
   # feedstock version tags (e.g. 1.0.0) map to upstream commits; fall
   # back to the raw ref for upstream tag names like alpha/beta
   git_rev: {{ versions.get(version, version) }}
+  patches:
+    # GCC 16's libstdc++ no longer pulls <algorithm>/<numeric> in through
+    # other headers; include them where std::transform, std::sort, ... are used.
+    - patches/gcc16-std-includes.patch
+    # libkfr_audio.a calls into libkfr_io.a, which is linked before it;
+    # list the KFR archives twice so the linker resolves it.
+    - patches/kfr-static-link-order.patch
 
 requirements:
   build:
@@ -55,7 +62,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
-    - root {{ root }}.*
+    - root_base {{ root }}.* cxx{{ root_cxx_standard }}*
+    - python
 
     - clang
     - cmake
@@ -63,11 +71,16 @@ requirements:
 
 
   host:
-    - root {{ root }}.*
+    - root_base {{ root }}.* cxx{{ root_cxx_standard }}*
+    - python
 
     # cpu build glob: the solver otherwise picks CUDA libtorch, whose
-    # Caffe2 cmake config then demands the CUDA toolkit at build time
-    - libtorch {{ libtorch }}.* cpu*
+    # Caffe2 cmake config then demands the CUDA toolkit at build time.
+    # cpu_generic, not cpu_mkl: MKL's libmkl_rt exports the fftw_* API, so
+    # with it on the link line Signal resolved FFTW from MKL, dropped the
+    # real libfftw3 and could not load without MKL (2025 only: .so.2).
+    # Built this way MKL stays optional: run accepts either cpu flavour.
+    - libtorch {{ libtorch }}.* cpu_generic*
 
     - minio-cpp>=0.3
     # date 3.0.5's parse() calls from_stream unqualified, which under C++20+
@@ -117,7 +130,7 @@ requirements:
     - kalman >=1.0.1
 
   run:
-    - root {{ root }}.*
+    - {{ pin_compatible('root_base', exact=True) }}
     - libtorch {{ libtorch }}.* cpu*
 
     - minio-cpp>=0.3
@@ -141,6 +154,16 @@ requirements:
     - fftw
     - kfrlib >=7.2
     - kalman >=1.0.1
+
+test:
+  files:
+    - rp_runtime.C
+  commands:
+    # Load every library, resolve dictionary classes (plain, templated,
+    # namespaced) and JIT-include a header: catches a root_base build
+    # mismatch (std.pcm), unresolved symbols and missing runtime libraries,
+    # none of which fail the build itself. Exit code = number of failures.
+    - root -l -b -q rp_runtime.C
 
 about:
   home: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"

@@ -1,0 +1,510 @@
+diff --git a/examples/Signal/wavelet.cc b/examples/Signal/wavelet.cc
+index d791a6e..260a20a 100644
+--- a/examples/Signal/wavelet.cc
++++ b/examples/Signal/wavelet.cc
+@@ -14,6 +14,7 @@
+ //
+ //   wavelet
+ // ============================================================================
++#include <algorithm>
+ 
+ #include <ROOT/IOPlus/Core/TCli.h>
+ #include <ROOT/IOPlus/Signal/Transform/TCWT.h>
+diff --git a/examples/Signal/wavelet_analyzer.cc b/examples/Signal/wavelet_analyzer.cc
+index 9210a53..26e96ab 100644
+--- a/examples/Signal/wavelet_analyzer.cc
++++ b/examples/Signal/wavelet_analyzer.cc
+@@ -14,6 +14,7 @@
+ //
+ //   wavelet_analyzer
+ // ============================================================================
++#include <algorithm>
+ 
+ #include <ROOT/IOPlus/Core/TCli.h>
+ #include <ROOT/IOPlus/Signal/Transform/TCWT.h>
+diff --git a/examples/Signal/wavelet_dualtree.cc b/examples/Signal/wavelet_dualtree.cc
+index 9536394..06868a3 100644
+--- a/examples/Signal/wavelet_dualtree.cc
++++ b/examples/Signal/wavelet_dualtree.cc
+@@ -16,6 +16,7 @@
+ //
+ //   wavelet_dualtree
+ // ============================================================================
++#include <algorithm>
+ 
+ #include <ROOT/IOPlus/Core/TCli.h>
+ #include <ROOT/IOPlus/Signal/Transform/TDWT.h>
+diff --git a/examples/Signal/wavelet_masking.cc b/examples/Signal/wavelet_masking.cc
+index b41aa08..3592d85 100644
+--- a/examples/Signal/wavelet_masking.cc
++++ b/examples/Signal/wavelet_masking.cc
+@@ -10,6 +10,7 @@
+ //
+ //   wavelet_masking
+ // ============================================================================
++#include <algorithm>
+ 
+ #include <ROOT/IOPlus/Core/TCli.h>
+ #include <ROOT/IOPlus/Signal/Transform/TDWT.h>
+diff --git a/examples/Tensor/mnist.cc b/examples/Tensor/mnist.cc
+index 13530d8..901fb4b 100644
+--- a/examples/Tensor/mnist.cc
++++ b/examples/Tensor/mnist.cc
+@@ -10,6 +10,7 @@
+ //
+ // Model / images / labels auto-downloaded on first run via TCurl and cached in
+ // <prefix>/share/models/.
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Tensor/TModel.h"
+ #include "ROOT/IOPlus/Tensor/TTensorF.h"
+diff --git a/include/ROOT/IOPlus/Cloud/TKafka.h b/include/ROOT/IOPlus/Cloud/TKafka.h
+index c4d04ae..a0cd3e1 100644
+--- a/include/ROOT/IOPlus/Cloud/TKafka.h
++++ b/include/ROOT/IOPlus/Cloud/TKafka.h
+@@ -1,5 +1,6 @@
+ #ifndef _ROOT_IOPLUS_CLOUD_TKAFKA_H
+ #define _ROOT_IOPLUS_CLOUD_TKAFKA_H
++#include <algorithm>
+ 
+ #include <Riostream.h>
+ #include <TObject.h>
+diff --git a/include/ROOT/IOPlus/Core/Helpers.h b/include/ROOT/IOPlus/Core/Helpers.h
+index 970e4e0..8122e61 100644
+--- a/include/ROOT/IOPlus/Core/Helpers.h
++++ b/include/ROOT/IOPlus/Core/Helpers.h
+@@ -1,5 +1,6 @@
+ #ifndef _ROOT_IOPLUS_CORE_HELPERS_H
+ #define _ROOT_IOPLUS_CORE_HELPERS_H
++#include <numeric>
+ 
+ #include <Riostream.h>
+ #include <algorithm>
+diff --git a/include/ROOT/IOPlus/Core/TKeyboard.h b/include/ROOT/IOPlus/Core/TKeyboard.h
+index e03e147..d45cb38 100644
+--- a/include/ROOT/IOPlus/Core/TKeyboard.h
++++ b/include/ROOT/IOPlus/Core/TKeyboard.h
+@@ -13,6 +13,7 @@
+  * @brief Description of the TKeyboard class.
+  * @details Detailed description of the TKeyboard class, its functionality, and usage.
+  */
++#include <algorithm>
+ 
+ 
+ #include <Riostream.h>
+diff --git a/include/ROOT/IOPlus/Signal/Backend/Impl/TKFRImpl.h b/include/ROOT/IOPlus/Signal/Backend/Impl/TKFRImpl.h
+index e24fea2..ad52836 100644
+--- a/include/ROOT/IOPlus/Signal/Backend/Impl/TKFRImpl.h
++++ b/include/ROOT/IOPlus/Signal/Backend/Impl/TKFRImpl.h
+@@ -1,5 +1,6 @@
+ #ifndef _ROOT_IOPLUS_SIGNAL_BACKEND_IMPL_TKFRIMPL_H
+ #define _ROOT_IOPLUS_SIGNAL_BACKEND_IMPL_TKFRIMPL_H
++#include <algorithm>
+ 
+ #include <optional>
+ #include <Rioplus.h>
+diff --git a/include/ROOT/IOPlus/Signal/Backend/Impl/kfr/iir_order.hpp b/include/ROOT/IOPlus/Signal/Backend/Impl/kfr/iir_order.hpp
+index a6f92fe..0b8554e 100644
+--- a/include/ROOT/IOPlus/Signal/Backend/Impl/kfr/iir_order.hpp
++++ b/include/ROOT/IOPlus/Signal/Backend/Impl/kfr/iir_order.hpp
+@@ -1,5 +1,6 @@
+ #ifndef _ROOT_IOPLUS_SIGNAL_BACKEND_IMPL_KFR_IIR_ORDER_HPP
+ #define _ROOT_IOPLUS_SIGNAL_BACKEND_IMPL_KFR_IIR_ORDER_HPP
++#include <algorithm>
+ 
+ #include <kfr/all.hpp>
+ #include "elliptic.hpp"
+diff --git a/include/ROOT/IOPlus/Signal/DSP/TPoleZeroMap.h b/include/ROOT/IOPlus/Signal/DSP/TPoleZeroMap.h
+index 02c5139..0e0d602 100644
+--- a/include/ROOT/IOPlus/Signal/DSP/TPoleZeroMap.h
++++ b/include/ROOT/IOPlus/Signal/DSP/TPoleZeroMap.h
+@@ -9,6 +9,7 @@
+  *
+  * *********************************************
+  */
++#include <algorithm>
+ 
+ 
+ #include <Riostream.h>
+diff --git a/include/ROOT/IOPlus/Signal/Transform/TSynchrosqueezingTransform.h b/include/ROOT/IOPlus/Signal/Transform/TSynchrosqueezingTransform.h
+index 2597d97..911f645 100644
+--- a/include/ROOT/IOPlus/Signal/Transform/TSynchrosqueezingTransform.h
++++ b/include/ROOT/IOPlus/Signal/Transform/TSynchrosqueezingTransform.h
+@@ -29,6 +29,7 @@
+  *
+  * *********************************************
+  */
++#include <algorithm>
+ 
+ #include <cmath>
+ #include <complex>
+diff --git a/src/Cloud/TKafka.cc b/src/Cloud/TKafka.cc
+index d4f092b..2d53a29 100644
+--- a/src/Cloud/TKafka.cc
++++ b/src/Cloud/TKafka.cc
+@@ -7,6 +7,7 @@
+  *
+  *********************************************
+  */
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Cloud/TKafka.h"
+ #include "ROOT/IOPlus/Cloud/TKafkaImpl.h"
+diff --git a/src/Core/TArchive.cc b/src/Core/TArchive.cc
+index ef21f03..17be3ae 100644
+--- a/src/Core/TArchive.cc
++++ b/src/Core/TArchive.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Core/TArchiveImpl.h"
+ #include "TMD5.h"
+ 
+diff --git a/src/Core/TCli.cc b/src/Core/TCli.cc
+index 0c1f268..35f185a 100644
+--- a/src/Core/TCli.cc
++++ b/src/Core/TCli.cc
+@@ -7,6 +7,7 @@
+  *
+  *********************************************
+  */
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Core/TCli.h"
+ #include <RConfigure.h>
+diff --git a/src/Core/TClock.cc b/src/Core/TClock.cc
+index 4ce9897..5c9c997 100644
+--- a/src/Core/TClock.cc
++++ b/src/Core/TClock.cc
+@@ -6,6 +6,7 @@
+  *
+  *********************************************
+  */
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Core/TClock.h"
+ 
+diff --git a/src/Core/TFileReader.cc b/src/Core/TFileReader.cc
+index 2533aac..14371c2 100644
+--- a/src/Core/TFileReader.cc
++++ b/src/Core/TFileReader.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Core/TFileReader.h"
+ #include <TError.h>
+ #include <TChain.h>
+diff --git a/src/Core/TKeyboard.cc b/src/Core/TKeyboard.cc
+index 12b3c57..dcdd8e6 100644
+--- a/src/Core/TKeyboard.cc
++++ b/src/Core/TKeyboard.cc
+@@ -8,6 +8,7 @@
+  * @date 2019-03-27
+  * @author Marco Meyer <marco.meyer@cern.ch>
+  */
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Core/TKeyboard.h"
+ 
+diff --git a/src/Core/TPicassoStream.cc b/src/Core/TPicassoStream.cc
+index 3184926..6d3946f 100644
+--- a/src/Core/TPicassoStream.cc
++++ b/src/Core/TPicassoStream.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "TPicassoStream.h"
+ ClassImp(TPicasso::Stream)
+ 
+diff --git a/src/Core/TPrint.cc b/src/Core/TPrint.cc
+index df5cf15..0b80429 100644
+--- a/src/Core/TPrint.cc
++++ b/src/Core/TPrint.cc
+@@ -8,6 +8,7 @@
+  * @date 2019-03-27
+  * @author Marco Meyer <marco.meyer@cern.ch>
+  */
++#include <algorithm>
+ 
+ #include "ROOT/IOPlus/Core/TPrint.h"
+ ClassImp(TPrint)
+diff --git a/src/Core/TVarexp.cc b/src/Core/TVarexp.cc
+index 23fc52c..a787d93 100644
+--- a/src/Core/TVarexp.cc
++++ b/src/Core/TVarexp.cc
+@@ -8,6 +8,7 @@
+  * @date 2019-03-27
+  * @author Marco Meyer <marco.meyer@cern.ch>
+  */
++#include <algorithm>
+ 
+ #include <time.h>
+ #include "ROOT/IOPlus/Core/TVarexp.h"
+diff --git a/src/Signal/Components/TFrequencySeriesT.cc b/src/Signal/Components/TFrequencySeriesT.cc
+index 46b7808..5185065 100644
+--- a/src/Signal/Components/TFrequencySeriesT.cc
++++ b/src/Signal/Components/TFrequencySeriesT.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Signal/Components/TFrequencySeriesT.h"
+ #include "ROOT/IOPlus/Signal/Components/TTimeSeriesT.h"
+ #include "ROOT/IOPlus/Signal/Backend/TKFR.h"
+diff --git a/src/Signal/TKFR.cc b/src/Signal/TKFR.cc
+index a91ffdd..565a53c 100644
+--- a/src/Signal/TKFR.cc
++++ b/src/Signal/TKFR.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Signal/Backend/Impl/TKFRImpl.h"
+ #include "ROOT/IOPlus/Signal/DSP/WaveletTypes.h"
+ #include "ROOT/IOPlus/Signal/Transform/TContinuousWaveletTransform.h"
+diff --git a/src/Signal/Transform/TDiscreteWaveletTransform.cc b/src/Signal/Transform/TDiscreteWaveletTransform.cc
+index 5ba2fb2..8945b73 100644
+--- a/src/Signal/Transform/TDiscreteWaveletTransform.cc
++++ b/src/Signal/Transform/TDiscreteWaveletTransform.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Signal/Transform/TDiscreteWaveletTransform.h"
+ 
+ #include <cmath>
+diff --git a/src/Tensor/Components/TTensorT.cc b/src/Tensor/Components/TTensorT.cc
+index 98e9985..a440973 100644
+--- a/src/Tensor/Components/TTensorT.cc
++++ b/src/Tensor/Components/TTensorT.cc
+@@ -1,3 +1,4 @@
++#include <numeric>
+ #include "ROOT/IOPlus/Tensor/Components/TTensorT.h"
+ #include "ROOT/IOPlus/Tensor/Components/TTensorTImpl.h"
+ 
+diff --git a/src/Tensor/Monitor/TSweepRunner.cc b/src/Tensor/Monitor/TSweepRunner.cc
+index d47663e..e25ff60 100644
+--- a/src/Tensor/Monitor/TSweepRunner.cc
++++ b/src/Tensor/Monitor/TSweepRunner.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include "ROOT/IOPlus/Tensor/Monitor/TSweep.h"
+ 
+ #include <TPrint.h>
+diff --git a/tests/Core/Extension/01_pstld.cc b/tests/Core/Extension/01_pstld.cc
+index e81a672..0f885b2 100644
+--- a/tests/Core/Extension/01_pstld.cc
++++ b/tests/Core/Extension/01_pstld.cc
+@@ -1,3 +1,5 @@
++#include <algorithm>
++#include <numeric>
+ 
+ #include <Rioplus.h>
+ 
+diff --git a/tests/Signal/05_fft.cc b/tests/Signal/05_fft.cc
+index 3edcfbc..4b34e63 100644
+--- a/tests/Signal/05_fft.cc
++++ b/tests/Signal/05_fft.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ #include <ROOT/IOPlus/Signal/Backend/TKFR.h>
+diff --git a/tests/Signal/07_psd.cc b/tests/Signal/07_psd.cc
+index e87a68a..8957e62 100644
+--- a/tests/Signal/07_psd.cc
++++ b/tests/Signal/07_psd.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ #include <ROOT/IOPlus/Signal/Backend/TKFR.h>
+diff --git a/tests/Signal/13_cwt.cc b/tests/Signal/13_cwt.cc
+index a5ea19f..978403e 100644
+--- a/tests/Signal/13_cwt.cc
++++ b/tests/Signal/13_cwt.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/14_qtransform.cc b/tests/Signal/14_qtransform.cc
+index 17e4883..334b7f4 100644
+--- a/tests/Signal/14_qtransform.cc
++++ b/tests/Signal/14_qtransform.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/15_dwt.cc b/tests/Signal/15_dwt.cc
+index 74ea58f..2090f6a 100644
+--- a/tests/Signal/15_dwt.cc
++++ b/tests/Signal/15_dwt.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/16_hht.cc b/tests/Signal/16_hht.cc
+index 33ffc41..e815cdb 100644
+--- a/tests/Signal/16_hht.cc
++++ b/tests/Signal/16_hht.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/19_filters_qtransform_reference.cc b/tests/Signal/19_filters_qtransform_reference.cc
+index e345598..a54dbe8 100644
+--- a/tests/Signal/19_filters_qtransform_reference.cc
++++ b/tests/Signal/19_filters_qtransform_reference.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <gtest/gtest.h>
+ 
+ #include "ROOT/IOPlus/Signal/Backend/TKFR.h"
+diff --git a/tests/Signal/21_wavelet_families.cc b/tests/Signal/21_wavelet_families.cc
+index 8e7199b..eb8e23f 100644
+--- a/tests/Signal/21_wavelet_families.cc
++++ b/tests/Signal/21_wavelet_families.cc
+@@ -3,6 +3,7 @@
+ // Reference numbers were generated with PyWavelets 1.8.0 (pywt.wavedec,
+ // pywt.waverec, pywt.swt, pywt.Wavelet, cwt_psi_single) and numpy; see
+ // tools/Signal/wavelets/ for the table generator. No Python needed here.
++#include <algorithm>
+ 
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+diff --git a/tests/Signal/24_matched_filter.cc b/tests/Signal/24_matched_filter.cc
+index 58b6b7b..3ad2ffb 100644
+--- a/tests/Signal/24_matched_filter.cc
++++ b/tests/Signal/24_matched_filter.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <gtest/gtest.h>
+ 
+ #include "ROOT/IOPlus/Signal/Backend/TKFR.h"
+diff --git a/tests/Signal/26_torch_fft_parity.cc b/tests/Signal/26_torch_fft_parity.cc
+index 2f4a96b..eb08a0c 100644
+--- a/tests/Signal/26_torch_fft_parity.cc
++++ b/tests/Signal/26_torch_fft_parity.cc
+@@ -10,6 +10,7 @@
+ // same "unnormalized forward" convention TKFR::DFT uses) by a short inline
+ // script; the numbers are embedded so the test does not need Python.
+ // ============================================================================
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ #include <ROOT/IOPlus/Signal/Backend/TKFR.h>
+diff --git a/tests/Signal/28_fft_engines.cc b/tests/Signal/28_fft_engines.cc
+index 8c5dc7a..fe7393b 100644
+--- a/tests/Signal/28_fft_engines.cc
++++ b/tests/Signal/28_fft_engines.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/29_series.cc b/tests/Signal/29_series.cc
+index 3afc1a7..d389da0 100644
+--- a/tests/Signal/29_series.cc
++++ b/tests/Signal/29_series.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Signal/Benchmark/FFTW/src/TFFTComplexRealFFTW.cxx b/tests/Signal/Benchmark/FFTW/src/TFFTComplexRealFFTW.cxx
+index 064e4a0..6c8ce24 100644
+--- a/tests/Signal/Benchmark/FFTW/src/TFFTComplexRealFFTW.cxx
++++ b/tests/Signal/Benchmark/FFTW/src/TFFTComplexRealFFTW.cxx
+@@ -40,6 +40,7 @@
+ ///          be retrieved when using the Get's methods.
+ ///
+ ////////////////////////////////////////////////////////////////////////////////
++#include <algorithm>
+ 
+ #include "TFFTComplexRealFFTW.h"
+ #include "fftw3.h"
+diff --git a/tests/Signal/Benchmark/FFTW/src/TFFTRealFFTW.cxx b/tests/Signal/Benchmark/FFTW/src/TFFTRealFFTW.cxx
+index a601d98..1fbfdf9 100644
+--- a/tests/Signal/Benchmark/FFTW/src/TFFTRealFFTW.cxx
++++ b/tests/Signal/Benchmark/FFTW/src/TFFTRealFFTW.cxx
+@@ -57,6 +57,7 @@
+ /// - DST-IV<-->DST-IV
+ ///
+ ////////////////////////////////////////////////////////////////////////////////
++#include <algorithm>
+ 
+ #include "TFFTRealFFTW.h"
+ #include "fftw3.h"
+diff --git a/tests/Signal/Benchmark/KFR/src/TFFTComplexRealKFR.cxx b/tests/Signal/Benchmark/KFR/src/TFFTComplexRealKFR.cxx
+index 38b1c46..04413a3 100644
+--- a/tests/Signal/Benchmark/KFR/src/TFFTComplexRealKFR.cxx
++++ b/tests/Signal/Benchmark/KFR/src/TFFTComplexRealKFR.cxx
+@@ -40,6 +40,7 @@
+ ///          be retrieved when using the Get's methods.
+ ///
+ ////////////////////////////////////////////////////////////////////////////////
++#include <algorithm>
+ 
+ #include "TFFTComplexRealKFR.h"
+ 
+diff --git a/tests/Signal/_vector.h b/tests/Signal/_vector.h
+index 88daf83..3bfb8e9 100644
+--- a/tests/Signal/_vector.h
++++ b/tests/Signal/_vector.h
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <complex>
+ #include <type_traits>
+ 
+diff --git a/tests/Tensor/03_onnx.cc b/tests/Tensor/03_onnx.cc
+index 6b3cdcd..4403165 100644
+--- a/tests/Tensor/03_onnx.cc
++++ b/tests/Tensor/03_onnx.cc
+@@ -1,3 +1,4 @@
++#include <algorithm>
+ #include <Riostream.h>
+ #include <gtest/gtest.h>
+ 
+diff --git a/tests/Tensor/10_semantics.cc b/tests/Tensor/10_semantics.cc
+index 81ac00c..ba09368 100644
+--- a/tests/Tensor/10_semantics.cc
++++ b/tests/Tensor/10_semantics.cc
+@@ -7,6 +7,7 @@
+  * the header templates (Reshape, Resize, the shape constructor, Map, ...) must
+  * compile in user code.
+  */
++#include <numeric>
+ #include <gtest/gtest.h>
+ 
+ #include <ROOT/IOPlus/Tensor/TTensor.h>
+diff --git a/tests/Tensor/11_review_tensor.cc b/tests/Tensor/11_review_tensor.cc
+index d0ef47e..d18e468 100644
+--- a/tests/Tensor/11_review_tensor.cc
++++ b/tests/Tensor/11_review_tensor.cc
+@@ -3,6 +3,7 @@
+  * \brief Regression tests for the review findings on TTensorT: constructor
+  *        bounds, complex fill, Eig, strided indexing and weighted reductions.
+  */
++#include <algorithm>
+ #include <gtest/gtest.h>
+ 
+ #include <ROOT/IOPlus/Tensor/TTensor.h>
+diff --git a/tests/Tensor/13_umap.cc b/tests/Tensor/13_umap.cc
+index fbc3470..cadb366 100644
+--- a/tests/Tensor/13_umap.cc
++++ b/tests/Tensor/13_umap.cc
+@@ -20,6 +20,7 @@
+  * Regenerate: python 13_umap_reference.py (umap-learn 0.5), which prints the
+  * block between the "generated" markers.
+  */
++#include <algorithm>
+ #include <gtest/gtest.h>
+ 
+ #include <ROOT/IOPlus/Tensor/TTensor.h>
+diff --git a/tests/Tensor/14_tsne.cc b/tests/Tensor/14_tsne.cc
+index 468ffbc..9fa1186 100644
+--- a/tests/Tensor/14_tsne.cc
++++ b/tests/Tensor/14_tsne.cc
+@@ -18,6 +18,7 @@
+  * Regenerate: python 14_tsne_reference.py (scikit-learn >= 1.5), which prints
+  * the block between the "generated" markers.
+  */
++#include <algorithm>
+ #include <gtest/gtest.h>
+ 
+ #include <ROOT/IOPlus/Tensor/TTensor.h>

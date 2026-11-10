@@ -1,0 +1,18 @@
+diff --git a/cmake/Packages/Signal/FindKFR.cmake b/cmake/Packages/Signal/FindKFR.cmake
+index 99589fa..7c5e61c 100644
+--- a/cmake/Packages/Signal/FindKFR.cmake
++++ b/cmake/Packages/Signal/FindKFR.cmake
+@@ -41,4 +41,11 @@ else()
+ 		PATHS ${KFR} $ENV{KFR}
+ 	)
+ 
+-endif()
+\ No newline at end of file
++endif()
++
++# KFR's archives depend on each other in both directions (kfr_audio calls
++# kfr_io's fopen_path, but kfr_io comes first). The GNU linker scans each
++# archive once, so list them twice to resolve the back-references.
++if(KFR_LIBRARIES)
++	list(APPEND KFR_LIBRARIES ${KFR_LIBRARIES})
++endif()
