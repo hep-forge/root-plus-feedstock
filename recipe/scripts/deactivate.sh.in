@@ -13,3 +13,8 @@ for _f in "${CONDA_PREFIX}/lib/"*.modulemap; do
     [ -f "$_f" ] && export CLING_MODULEMAP_FILES="${CLING_MODULEMAP_FILES//${_f}:/}"
 done
 unset _f
+if [ -n "${_CONDA_BACKUP_ROOT_INCLUDE_PATH_RIOPLUS+x}" ]; then
+    export ROOT_INCLUDE_PATH="${_CONDA_BACKUP_ROOT_INCLUDE_PATH_RIOPLUS}"
+    [ -z "${ROOT_INCLUDE_PATH}" ] && unset ROOT_INCLUDE_PATH
+    unset _CONDA_BACKUP_ROOT_INCLUDE_PATH_RIOPLUS
+fi

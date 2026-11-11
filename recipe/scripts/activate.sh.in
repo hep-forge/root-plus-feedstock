@@ -26,3 +26,11 @@ else
     done
 fi
 unset _f
+# Classic dictionaries (no runtime C++ modules: macOS, linux-aarch64): the
+# autoload information compiled into them names Shims/ and Core/ headers by
+# file name alone, so let ROOT look in those directories. None of their
+# names collide with ROOT's own headers.
+if [ -f "${CONDA_PREFIX}/lib/libRIOPlus_rdict.pcm" ]; then
+    export _CONDA_BACKUP_ROOT_INCLUDE_PATH_RIOPLUS="${ROOT_INCLUDE_PATH:-}"
+    export ROOT_INCLUDE_PATH="${CONDA_PREFIX}/include/ROOT/IOPlus/Shims:${CONDA_PREFIX}/include/ROOT/IOPlus/Core${ROOT_INCLUDE_PATH:+:${ROOT_INCLUDE_PATH}}"
+fi

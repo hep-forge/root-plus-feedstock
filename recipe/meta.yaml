@@ -51,6 +51,9 @@ source:
     # libkfr_audio.a calls into libkfr_io.a, which is linked before it;
     # list the KFR archives twice so the linker resolves it.
     - patches/kfr-static-link-order.patch
+    # Classic dictionaries: give rootcling each header as it is #included,
+    # so the .rootmap records ROOT/IOPlus/... instead of a bare file name.
+    - patches/classic-rootmap-headers.patch
 
 requirements:
   build:
@@ -79,7 +82,8 @@ requirements:
     # cpu_generic, not cpu_mkl: MKL's libmkl_rt exports the fftw_* API, so
     # with it on the link line Signal resolved FFTW from MKL, dropped the
     # real libfftw3 and could not load without MKL (2025 only: .so.2).
-    # Built this way MKL stays optional: run accepts either cpu flavour.
+    # Built this way MKL is not needed; run keeps cpu_generic too, since
+    # Signal then links its libopenblas.so.0 directly.
     - libtorch {{ libtorch }}.* cpu_generic*
 
     - minio-cpp>=0.3
@@ -131,7 +135,7 @@ requirements:
 
   run:
     - {{ pin_compatible('root_base', exact=True) }}
-    - libtorch {{ libtorch }}.* cpu*
+    - libtorch {{ libtorch }}.* cpu_generic*
 
     - minio-cpp>=0.3
     - libdate-tz 3.0.3

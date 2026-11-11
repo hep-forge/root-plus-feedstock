@@ -1,0 +1,27 @@
+diff --git a/cmake/Modules/RootFramework.cmake b/cmake/Modules/RootFramework.cmake
+index d64d65e..305e64a 100644
+--- a/cmake/Modules/RootFramework.cmake
++++ b/cmake/Modules/RootFramework.cmake
+@@ -304,6 +304,22 @@ function(ADD_ROOT_LIBRARY)
+         list(REMOVE_ITEM MY_ROOT_HEADERS_FOR_DICTIONARY ${EXCLUDED_HEADER})
+     endforeach()
+ 
++    if(NOT ROOT_RUNTIME_CXXMODULES)
++        # Classic dictionaries: pass each header the way it is #included
++        # (ROOT/IOPlus/Core/TKeyboard.h). rootcling writes the names into the
++        # .rootmap as given; absolute paths came out as bare file names
++        # (TKeyboard.h), which ROOT's autoparsing cannot find at run time.
++        set(_HEADERS)
++        foreach(HEADER ${MY_ROOT_HEADERS_FOR_DICTIONARY})
++            if(NOT IS_ABSOLUTE ${HEADER})
++                set(HEADER "${CMAKE_CURRENT_SOURCE_DIR}/${HEADER}")
++            endif()
++            file(RELATIVE_PATH HEADER ${ROOT_SOURCE_DIR}/include ${HEADER})
++            list(APPEND _HEADERS ${HEADER})
++        endforeach()
++        set(MY_ROOT_HEADERS_FOR_DICTIONARY ${_HEADERS})
++    endif()
++
+     ROOT_GENERATE_DICTIONARY(${MY_ROOT_DICTIONARY}
+         ${MY_ROOT_HEADERS_FOR_DICTIONARY}
+         MODULE ${MY_ROOT_LIBRARY}

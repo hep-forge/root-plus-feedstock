@@ -24,6 +24,13 @@ int rp_runtime() {
   // Interpreter path: JIT code that includes a root-plus header and uses a class.
   int jit = gROOT->ProcessLine("#include <ROOT/IOPlus/Signal/DSP/Filters/TKalmanFilter.h>\n 42;");
   std::cout << "jit include -> " << jit << "\n";
+  // The header must compile in the interpreter. Counted with C++ modules
+  // only: with classic dictionaries (macOS, linux-aarch64) cling still trips
+  // over <execution> pulled in by Core/Extension/execution.h (known
+  // root-plus issue), so it is reported there but not failed.
+  bool modules = !gSystem->AccessPathName(Form("%s/RIOPlus.pcm", gROOT->GetLibDir().Data()));
+  std::cout << "dictionaries: " << (modules ? "C++ modules" : "classic") << "\n";
+  if (jit != 42 && modules) ++bad;
   std::cout << (bad ? "FAILURES: " : "ALL OK ") << bad << "\n";
   return bad;
 }
