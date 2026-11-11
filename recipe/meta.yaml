@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "217bdbca69e5fd3afdbcd212e3b1ffd8aef2b43d",
+    "gamma": "71496f5179e12b822d338f244172c49cf538a05a",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -44,16 +44,6 @@ source:
   # feedstock version tags (e.g. 1.0.0) map to upstream commits; fall
   # back to the raw ref for upstream tag names like alpha/beta
   git_rev: {{ versions.get(version, version) }}
-  patches:
-    # GCC 16's libstdc++ no longer pulls <algorithm>/<numeric> in through
-    # other headers; include them where std::transform, std::sort, ... are used.
-    - patches/gcc16-std-includes.patch
-    # libkfr_audio.a calls into libkfr_io.a, which is linked before it;
-    # list the KFR archives twice so the linker resolves it.
-    - patches/kfr-static-link-order.patch
-    # Classic dictionaries: give rootcling each header as it is #included,
-    # so the .rootmap records ROOT/IOPlus/... instead of a bare file name.
-    - patches/classic-rootmap-headers.patch
 
 requirements:
   build:
