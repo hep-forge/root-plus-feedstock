@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "71496f5179e12b822d338f244172c49cf538a05a",
+    "gamma": "e13d4c6a8c94397a4939d43297ba9818991e4ad2",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -41,9 +41,10 @@ package:
 
 source:
   git_url: "https://git.ligo.org/kagra/libraries-addons/root/root-plus"
-  # feedstock version tags (e.g. 1.0.0) map to upstream commits; fall
-  # back to the raw ref for upstream tag names like alpha/beta
-  git_rev: {{ versions.get(version, version) }}
+  # feedstock version tags (gamma, beta, ...) map to upstream commits. Any
+  # other version -- the `head` tag, which hep-bot rebuilds whenever upstream
+  # master moves -- builds the tip of upstream's default branch.
+  git_rev: {{ versions.get(version, "HEAD") }}
 
 requirements:
   build:
