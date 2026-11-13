@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "e13d4c6a8c94397a4939d43297ba9818991e4ad2",
+    "gamma": "2b4935d0ef02b5d20128c2a776ad18801a00a750",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
