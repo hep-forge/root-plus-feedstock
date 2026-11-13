@@ -2,6 +2,7 @@
 #include <TClass.h>
 #include <TSystem.h>
 #include <TROOT.h>
+#include <TInterpreter.h>
 #include <iostream>
 int rp_runtime() {
   int bad = 0;
@@ -22,18 +23,18 @@ int rp_runtime() {
     if (!ok) ++bad;
   }
   // Interpreter path: JIT code that includes a root-plus header and uses it.
-  // C++ modules only: with classic dictionaries (macOS, linux-aarch64) cling
-  // trips over <execution> pulled in by Core/Extension/execution.h (known
-  // root-plus issue) and on macOS crashes while unloading the failed parse.
+  // Every platform: with classic dictionaries (macOS, linux-aarch64) cling
+  // parses the headers text-wise, and on macOS only the libc headers in ROOT's
+  // own prebuilt module are safe there (root-plus keeps the others out).
   bool modules = !gSystem->AccessPathName(Form("%s/RIOPlus.pcm", gROOT->GetLibDir().Data()));
   std::cout << "dictionaries: " << (modules ? "C++ modules" : "classic") << "\n";
-  if (modules) {
-    int jit = gROOT->ProcessLine("#include <ROOT/IOPlus/Signal/DSP/Filters/TKalmanFilter.h>\n 42;");
-    std::cout << "jit include -> " << jit << "\n";
-    if (jit != 42) ++bad;
-  } else {
-    std::cout << "jit include: skipped (classic dictionaries)\n";
-  }
+  // The #include on its own: with an expression in the same input, cling
+  // wraps both in a function and would parse the header inside it.
+  int err = TInterpreter::kNoError;  // ProcessLine reports into an int
+  gROOT->ProcessLine("#include <ROOT/IOPlus/Signal/Kalman/TKalmanFilter.h>", &err);
+  long jit = (err == TInterpreter::kNoError) ? gROOT->ProcessLine("42;", &err) : 0;
+  std::cout << "jit include -> " << jit << " (error code " << err << ")\n";
+  if (err != TInterpreter::kNoError || jit != 42) ++bad;
   std::cout << (bad ? "FAILURES: " : "ALL OK ") << bad << "\n";
   return bad;
 }

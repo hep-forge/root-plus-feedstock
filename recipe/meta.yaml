@@ -1,7 +1,7 @@
 {% set name = environ.get('ANACONDA_PACKAGE', "root-plus")|string|lower %}
 
 {% set versions = {
-    "gamma": "2b4935d0ef02b5d20128c2a776ad18801a00a750",
+    "gamma": "efca093347d5674733cc44f13b621e7f973972d3",
     "beta": "13f0e9661ccaaaaf166a1fd43c561f9c34359553",
     "alpha": "be02f507e90727eaa5134f9ccea6c75dbb17d813",
 } %}
@@ -122,7 +122,7 @@ requirements:
     - kfrlib >=7.2
     - libxml2-devel
     # TKalmanRecord / TKalmanFilter compile to nothing without libKalmanFramework.
-    - kalman >=1.0.1
+    - kalman >=1.0.0
 
   run:
     - {{ pin_compatible('root_base', exact=True) }}
@@ -148,7 +148,7 @@ requirements:
     - cfitsio
     - fftw
     - kfrlib >=7.2
-    - kalman >=1.0.1
+    - kalman >=1.0.0
 
 test:
   files:
