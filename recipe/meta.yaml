@@ -12,10 +12,18 @@
 
 {% set libtorch = libtorch if libtorch else "0" %}
 {% set root = root if root else "0" %}
+# CPU or CUDA build (conda_build_config.yaml cuda_compiler_version). Both are
+# compiled against the CPU libTorch: the CUDA one differs in what it runs with.
+{% set cuda_compiler_version = cuda_compiler_version or "None" %}
+{% set cuda = cuda_compiler_version != "None" %}
+{% set flavour = "cuda" ~ cuda_compiler_version.replace(".", "") if cuda else "cpu" %}
 
 build:
-  number: 0
-  string: "torch{{ libtorch.replace('.', '') }}_root{{ root.replace('.', '') }}"
+  # conda-forge's ranking: CUDA builds 200 above CPU ones, and they need a
+  # driver (__cuda below), so a machine with an NVIDIA GPU gets the CUDA build
+  # and every other machine the CPU one. The CPU string is unchanged.
+  number: {{ 200 if cuda else 0 }}
+  string: "torch{{ libtorch.replace('.', '') }}{{ '_' ~ flavour if cuda else '' }}_root{{ root.replace('.', '') }}"
   # .pcm are binary Clang module caches, not text -- conda-build's default
   # prefix-relocation naively text-substitutes the build prefix inside
   # every installed file it doesn't know to skip, which can corrupt a
@@ -75,6 +83,13 @@ requirements:
     # real libfftw3 and could not load without MKL (2025 only: .so.2).
     # Built this way MKL is not needed; run keeps cpu_generic too, since
     # Signal then links its libopenblas.so.0 directly.
+    #
+    # The CUDA build compiles against this CPU libTorch as well: libTorch's
+    # CMake config would otherwise enable the CUDA language, and conda-forge's
+    # nvcc 12.9 cannot be installed beside GCC 16 (gcc_impl <15). Nothing here
+    # needs it: every CUDA path is chosen at run time (torch::cuda::is_available),
+    # and the libraries link libtorch.so, which in a CUDA libTorch loads
+    # libtorch_cuda (build.sh checks the link).
     - libtorch {{ libtorch }}.* cpu_generic*
 
     - minio-cpp>=0.3
@@ -126,7 +141,8 @@ requirements:
 
   run:
     - {{ pin_compatible('root_base', exact=True) }}
-    - libtorch {{ libtorch }}.* cpu_generic*
+    - libtorch {{ libtorch }}.* {{ flavour }}_generic*
+    - __cuda  # [cuda_compiler_version != "None"]
 
     - minio-cpp>=0.3
     - libdate-tz 3.0.3

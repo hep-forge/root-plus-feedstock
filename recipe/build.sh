@@ -37,3 +37,12 @@ make install
 if [[ "${CLASSIC_DICT:-0}" == "1" ]]; then
     "${PYTHON}" "${RECIPE_DIR}/scripts/fix_rootmaps.py" "${PREFIX}"
 fi
+
+# The CUDA build runs on a CUDA libTorch through libtorch.so, which loads
+# libtorch_cuda: the libraries using torch must keep it linked
+if [[ "${cuda_compiler_version:-None}" != "None" ]]; then
+    for lib in RIOPlus RIOPlus_Signal RIOPlus_Tensor; do
+        ${READELF:-readelf} -d "$PREFIX/lib/lib${lib}${SHLIB_EXT}" | grep -q 'NEEDED.*\[libtorch\.so\]' \
+            || { echo "lib${lib} does not link libtorch.so"; exit 1; }
+    done
+fi
