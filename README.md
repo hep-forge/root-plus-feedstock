@@ -15,8 +15,8 @@ ROOT+ for Tensor Calculation & Advanced Signal Processing
 
 | Architecture | Latest published |
 |--------------|------------------|
-| linux-amd64 (`linux-64`) | ✅ `head` |
-| linux-arm64 (`linux-aarch64`) | ✅ `head` |
+| linux-amd64 (`linux-64`) | ✅ `gamma` |
+| linux-arm64 (`linux-aarch64`) | ✅ `gamma` |
 
 _As of the last feedstock render; the badges above are live._
 
